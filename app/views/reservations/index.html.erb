@@ -1,0 +1,82 @@
+<h1 class="m-4">予約済み一覧</h1>
+<div class="m-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= Room.human_attribute_name(:image) %></th>
+        <th scope="col"><%= Room.human_attribute_name(:name) %></th>
+        <th scope="col"><%= Room.human_attribute_name(:content) %></th>
+        <th scope="col"><%= Reservation.human_attribute_name(:total_price) %></th>
+        <th scope="col"><%= Reservation.human_attribute_name(:reservation_start_date) %></th>
+        <th scope="col"><%= Reservation.human_attribute_name(:reservation_end_date) %></th>
+        <th scope="col"><%= Reservation.human_attribute_name(:updated_at) %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <% if user_signed_in? && current_user.id == reservation.user_id %>
+          <tr>
+            <td>
+              <% if reservation.room.present? && reservation.room.image.attached? %>
+                <%= image_tag(reservation.room.image.variant(resize_to_fit: [150, 120])) %>
+              <% end %>
+            </td>
+            <td><%= link_to reservation.room.name, room_path(reservation.room), class: "text-decoration-none" %></td>
+            <td><%= reservation.room.content %></td>
+            <td>¥<%= number_with_delimiter(reservation.total_price.to_i) %></td>
+            <td><%= reservation.reservation_start_date.strftime("%Y/%m/%d") %></td>
+            <td><%= reservation.reservation_end_date.strftime("%Y/%m/%d") %></td>
+            <td><%= reservation.updated_at.strftime("%Y/%m/%d %H:%M") %></td>
+            <td>
+              <div class="dropdown">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-three-dots-vertical text-muted"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><%= link_to "再予約", edit_reservation_path(reservation), class: "dropdown-item", data: { "turbolinks" => false } %></li>
+                  <li>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#dropdownModal<%= reservation.id %>">
+                      予約を削除</button>
+                  </li>
+                </ul>
+              </div>
+              <!-- Modal -->
+              <div class="modal fade" id="dropdownModal<%= reservation.id %>" tabindex="-1" aria-labelledby="dropdownModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="dropdownModalLabel">以下の予約を削除しますか？</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col m-2">
+                            <%= image_tag(reservation.room.image.variant(resize_to_fit: [150, 120])) %>
+                          </div>
+                          <div class="col-6 m-2 d-flex flex-column">
+                            <p class="m-1"><%= reservation.room.name %></p>
+                            <p class="m-1"><%= reservation.reservation_start_date %>〜<%= reservation.reservation_end_date %></p>
+                            <p class="m-1"><%= reservation.person_num %>人</p>
+                            <p class="m-1"><%= reservation.total_price %></p>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="my-2">よろしければ「削除」ボタンを押してください。</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                      <%= button_to "削除", reservation_path(reservation), method: :delete, type: "button", class: "btn btn-primary" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

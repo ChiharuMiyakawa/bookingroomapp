@@ -1,0 +1,12 @@
+<h1 class= "align-items-center m-4">Potepan Shareで<br>
+  まだ体験したことのない<br>
+  旅をしよう</h1>
+<%= render "rooms/search" %>
+<div class="container d-flex justify-content-center my-4">
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item home-list border-end p-0"><%= link_to '東京', search_rooms_path(area: '東京'), class: 'text-info text-decoration-none p-3' %></li>
+    <li class="list-group-item home-list border-end p-0"><%= link_to '大阪', search_rooms_path(area: '大阪'), class: 'text-info text-decoration-none p-3' %></li>
+    <li class="list-group-item home-list border-end p-0"><%= link_to '京都', search_rooms_path(area: '京都'), class: 'text-info text-decoration-none p-3' %></li>
+    <li class="list-group-item home-list p-0"><%= link_to '札幌', search_rooms_path(area: '札幌'), class: 'text-info text-decoration-none p-3' %></li>
+  </ul>
+</div>

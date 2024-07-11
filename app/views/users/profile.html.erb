@@ -1,0 +1,31 @@
+<h1 class="m-4">設定</h1>
+<div class ="UserContainer m-4">
+  <div class="row">
+    <div class ="sidecontainer col-4">
+      <div class="list-group">
+        <a href="/users/account" class="list-group-item list-group-item-action">
+          アカウント
+        </a>
+        <a href="/users/profile" class="list-group-item list-group-item-action active" aria-current="true">プロフィール</a>
+      </div>
+    </div>
+    <div class ="MenuContainer col-8">
+      <div class ="d-flex border-bottom align-items-end justify-content-between">
+        <h1>プロフィール</h1>
+        <%= link_to "編集", users_profile_edit_path, class:"me-4 fs-5 text-decoration-none" %>
+      </div>
+      <div class = "d-flex">
+        <label class="m-2 fs-5 w-25">アイコン画像</label>
+        <p class="m-2 fs-5"><%= image_tag(current_user.avatar.variant(resize_to_fill: [64, 64]), class: "rounded-circle") %></p>
+      </div>
+      <div class = "d-flex">
+        <label class="m-2 fs-5 w-25">名前</label>
+        <p class="m-2 fs-5"><%= current_user.username %></p>
+      </div>
+      <div class = "d-flex">
+        <label class="m-2 fs-5 w-25">自己紹介</label>
+        <p class="m-2 fs-5"><%= current_user.userprofile %></p>
+      </div>
+    </div>
+  </div>
+</div>

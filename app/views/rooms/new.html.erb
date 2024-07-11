@@ -1,0 +1,9 @@
+<div class="FormWrapper center-block">
+  <div class="FormContainer d-flex flex-column mx-auto rounded border p-4">
+    <h2 class="mt-2 mb-2">施設の新規登録</h2>
+    <%= render "form",room: @room %>
+    <button type="button" class="btn btn-secondary w-100">
+      <%= link_to "キャンセル", rooms_path, method: :get, class: "text-decoration-none text-muted" %>
+    </button>
+  </div>
+</div>

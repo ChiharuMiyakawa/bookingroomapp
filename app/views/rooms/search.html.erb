@@ -1,0 +1,28 @@
+<%= render "rooms/search" %>
+<div class ="SearchWrapper m-4">
+  <div class ="container">
+    <h2>検索結果</h2>
+    <%= "エリア：#{@area.gsub('%', '')}" if @area.present? %>
+    <%= "キーワード：#{@keyword.gsub('%', '')}" if @keyword.present? %>
+    <p><%= @rooms.count %>件が見つかりました。</p>
+  </div>
+  <% if @rooms.present? %>
+    <ul  class="row d-flex flex-wrap list-unstyled w-100 m-0">
+      <% @rooms.each do |room| %>
+        <div class="col-md-6 col-lg-4 text-truncate g-3 card-group">
+          <div class="card m-2 bg-light">
+            <%= image_tag(room.image, class:"card-image-top") %>
+            <div class="card-body bg-secondary">
+              <h3><%= link_to room.name, room_path(room), class: "text-decoration-none text-info" %></h3>
+              <%= room.address %><br>
+              <%= room.content  %><br>
+              <p class="fs-6"><i class="bi bi-star-fill"></i></p>
+              <p class="text-primary fs-5">¥<%= number_with_delimiter(room.price) %></p>
+              <%= link_to "詳細はこちら", room_path(room),class: "text-decoration-none btn btn-outline-info w-100" %><br>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

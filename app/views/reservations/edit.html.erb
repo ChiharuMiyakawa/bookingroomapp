@@ -1,0 +1,71 @@
+<div class="FormWrapper center-block">
+  <div class="FormContainer d-flex flex-column mx-auto rounded border p-4">
+    <h2 class="mt-2 mb-2">再予約</h2>
+    <div class ="RoomShowContainer m-4">
+      <div class="row">
+        <div class ="container col-12">
+          <% if @room.image.attached? %>
+            <%= image_tag(@room.image.variant(resize_to_fit: [500, 400]).processed, class: "w-100") %>
+          <% end %>
+          <div class ="d-flex justify-content-between w-100 mt-3">
+            <h3><%= @room.name %></h3>
+            <div>
+              <h3 class="text-primary m-0">¥<%= number_with_delimiter(@room.price) %>~</h3>
+              <p class="fs-6">(1泊 1名あたり)</p>
+            </div>
+          </div>
+          <div class = "d-flex flex-column">
+            <p class="mb-1"><%= @room.address %></p>
+            <p><i class="bi bi-star-fill"></i></p>
+            <p class="mt-1"><%= @room.content %></p>
+          </div>
+        </div>
+        <%= form_with model: @reservation, url: confirm_reservations_path, method: :post, html: {class: "w-100 m-0"} do |f| %>
+          <%= f.hidden_field :id, value: @reservation.id if @reservation.persisted? %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <div class="field mb-2">
+            <%= f.label :reservation_start_date, class: "required" %>
+            <%= f.date_field :reservation_start_date, class:"form-control w-100", style: 'height: 40px;' %>
+            <% if @reservation.errors.any? %>
+              <% @reservation.errors.full_messages_for(:reservation_start_date).each do |message| %>
+                <ul class="m-0 p-0">
+                  <li class = "error_text text-danger list-unstyled"><%= message %></li>
+                </ul>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="field mb-2">
+            <%= f.label :reservation_end_date, class: "required" %>
+            <%= f.date_field :reservation_end_date, class:"form-control w-100", style: 'height: 40px;' %>
+            <% if @reservation.errors.any? %>
+              <% @reservation.errors.full_messages_for(:reservation_end_date).each do |message| %>
+                <ul class="m-0 p-0">
+                  <li class = "error_text text-danger list-unstyled"><%= message %></li>
+                </ul>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="field mb-2">
+            <%= f.label :person_num, class: "required" %>
+            <div class="input-group w-100">
+              <%= f.number_field :person_num, class: "form-control w-auto", style: 'height: 40px;', min: 1, placeholder: "0" %>
+              <span class="input-group-text">人</span>
+            </div>
+            <% if @reservation.errors.any? %>
+              <% @reservation.errors.full_messages_for(:person_num).each do |message| %>
+                <ul class="m-0 p-0">
+                  <li class = "error_text text-danger list-unstyled"><%= message %></li>
+                </ul>
+              <% end %>
+            <% end %>
+          </div>
+          <%= f.submit "再予約する" ,class:"btn btn-info w-100 my-2" %>
+          <%= link_to "キャンセル", reservations_path ,class: "btn btn-secondary w-100 text-decoration-none text-muted" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

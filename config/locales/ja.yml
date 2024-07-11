@@ -1,0 +1,44 @@
+ja:
+  hello: "こんにちは"
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
+    registrations:
+      signed_up: 'アカウント登録が完了しました。'
+      updated: 'アカウント情報が更新されました。'
+      destroyed: 'アカウントが削除されました。'
+    passwords:
+      send_instructions: 'パスワードの再設定方法を送信しました。'
+      updated: 'パスワードが変更されました。'
+
+  activerecord:
+  attributes:
+    user: 'ユーザー'
+    username: 'ユーザー名'
+    email: 'メールアドレス'
+    password: 'パスワード'
+    password_confirmation: '確認用パスワード'
+    current_password: '現在のパスワード'
+    userprofile: '自己紹介'
+    avatar: '画像'
+
+    reservation: '予約'
+    person_num: '人数'
+    reservation_start_date: 'チェックイン'
+    reservation_end_date: 'チェックアウト'
+    total_price: '合計金額'
+    updated_at: '予約確定日時'
+
+    room: '施設'
+    name: '施設名'
+    content: '説明文'
+    price: '料金'
+    address: '住所'
+    image: '画像'
+    created_at: '作成日'
+
+
+
+
+

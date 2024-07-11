@@ -1,0 +1,17 @@
+<div class="SearchForm row bg-success m-0 p-4 align-items-center">
+  <div class="container d-flex justify-content-center h-100">
+    <%= form_with url: search_rooms_path, local: true, method: :get, class:"SearchForm_group col-12 col-md-10 d-flex flex-wrap align-items-center justify-content-center p-0" do |f| %>
+      <div class="search_field h-100 m-1 rounded-3">
+        <%= f.select :area, ['東京','大阪','京都','札幌'], include_blank: "エリア", class:"form-select" %>
+      </div>
+      <div class="search_field h-100 m-1">
+        <%= f.text_field :keyword, placeholder:"キーワード",class: "form-control h-100 p-1 rounded-3 border-dark" %>
+      </div>
+      <div class="actions m-1">
+        <%= button_tag type: :submit, class: "btn btn-outline-info h-100 w-100" do %>
+          <i class="bi bi-search"></i>検索
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

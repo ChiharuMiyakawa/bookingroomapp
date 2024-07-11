@@ -1,0 +1,19 @@
+<div class="FormWrapper center-block ">
+  <div class="LoginContainer d-flex flex-column mx-auto rounded border p-4" style="width: 480px;">
+    <h2 class="mt-2 mb-2 text-center">ログイン</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field mb-2">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="actions mb-2">
+        <%= f.submit "ログイン", class:"btn btn-info w-100" %>
+      </div>
+      <button type="button" class="btn btn-secondary w-100"><%= link_to "新しいアカウントを作成", new_user_registration_path ,class: "text-decoration-none text-muted" %></button>
+    <% end %>
+  </div>
+</div>

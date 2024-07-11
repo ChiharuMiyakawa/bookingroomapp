@@ -1,0 +1,51 @@
+<div class="FormWrapper center-block ">
+  <div class="LoginContainer d-flex flex-column mx-auto rounded border p-4" style="width: 480px;">
+    <h2 class="mt-2 mb-2 text-center">新規登録</h2>
+    <%= form_with model: @user, url: user_registration_path do |f| %>
+      <div class="field mb-2">
+        <%= f.label :username, class: "required" %>
+        <% if @user.errors.any? %>
+          <% @user.errors.full_messages_for(:username).each do |message| %>
+            <ul class="m-0 p-0">
+              <li class = "error_text text-danger list-unstyled"><%= message %></li>
+            </ul>
+          <% end %>
+        <% end %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "name", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :email, class: "required" %>
+        <% if @user.errors.any? %>
+          <% @user.errors.full_messages_for(:email).each do |message| %>
+            <ul class="m-0 p-0">
+              <li class = "error_text text-danger list-unstyled"><%= message %></li>
+            </ul>
+          <% end %>
+        <% end %>
+        <%= f.email_field :email, autocomplete: "email", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :password, class: "required" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %><br />
+        <% if @user.errors.any? %>
+          <% @user.errors.full_messages_for(:password).each do |message| %>
+            <ul class="m-0 p-0">
+              <li class = "error_text text-danger list-unstyled"><%= message %></li>
+            </ul>
+          <% end %>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-100", style: 'height: 40px;' %>
+      </div>
+      <div class="actions mb-2">
+        <%= f.submit "新しいアカウントを作成", class:"btn btn-primary w-100" %>
+      </div>
+    <% end %>
+    <button type="button" class="btn btn-light w-100"><%= link_to "アカウントをお持ちの方はログイン", new_user_session_path ,class: "text-decoration-none text-muted" %></button>
+  </div>
+</div>
